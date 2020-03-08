@@ -6,7 +6,6 @@ const install = function(Vue) {
 
 if (window !== undefined && window.Vue) {
     install(window.Vue);
-    console.log('完成啦');
 }
 
 
