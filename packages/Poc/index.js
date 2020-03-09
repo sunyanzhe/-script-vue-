@@ -1,5 +1,5 @@
-import Poc from './src/Poc.vue'
-Poc.install = function(Vue) {
-    Vue.component(Poc.name, Poc)
+import PocHeader from './src/PocHeader.vue'
+PocHeader.install = function(Vue) {
+    Vue.component(PocHeader.name, PocHeader)
 }
-export default Poc;
+export default PocHeader;
