@@ -71,19 +71,19 @@ export default {
                     key: 'molo',
                     name: '摹略-运营平台',
                     src: 'http://img30.360buyimg.com/jr_image/jfs/t1/88329/4/14470/515/5e65efa7Ed3c7d5df/97cbaac6065793dc.png',
-                    link: 'http://molo.jd.com'
+                    link: '//molo-demo.jd.com'
                 },
                 {
                     key: 'lego',
                     name: '乐高-资源管理',
                     src: 'http://img30.360buyimg.com/jr_image/jfs/t1/107824/5/8208/448/5e65efa7E1b208d81/bc739202bd467e83.png',
-                    link: 'http://mcmktadmin.jd.com'
+                    link: '//legoadmin-demo.jd.com'
                 },
                 {
                     key: 'hangmu',
                     name: '航母-管理后台',
                     src: 'http://img30.360buyimg.com/jr_image/jfs/t1/89569/39/14359/470/5e65efa6E35dbbedb/a11c35a38cee20b1.png',
-                    link: 'http://mcauth.jdfmgt.com'
+                    link: '//mcauth-demo.jd.com'
                 }
             ]
         }
