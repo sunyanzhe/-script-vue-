@@ -1,7 +1,7 @@
 <template>
-    <div class="poc-header">
+    <div class="poc-header" >
         <!-- 左侧 -->
-        <div class="poc-left-area" id="LEFT_AREA">
+        <div @click.stop class="poc-left-area" id="LEFT_AREA" :style="{'flex-basis': menuWidth}">
             <div class="icon-area">
                 <div class="poc-menu-icon" :class="{'actived': isSlide}" @click="clickHandle">
                     <span class="poc-menu-icon-item"></span>
@@ -23,9 +23,9 @@
         <div class="poc-center-area">
             <slot name="center"></slot>
         </div>
-        <div class="poc-right-area">
+        <div @click.stop class="poc-right-area">
             <ul class="poc-feature-list">
-                <li class="poc-feature-item" @click.stop="$emit('clickHelper')">
+                <li v-if="!!helpLink"  class="poc-feature-item" @click.stop="clickLiHandle(helpLink)">
                     <img class="poc-feature-item-icon" src="http://img30.360buyimg.com/jr_image/jfs/t1/95467/4/14465/1186/5e66162fEe60ea3c0/f15806200277ddc9.png" alt="" />
                     <span class="poc-feature-item-name">帮助中心</span>
                 </li>
@@ -33,7 +33,7 @@
                     <img class="poc-feature-item-icon" src="http://img30.360buyimg.com/jr_image/jfs/t1/93416/30/14488/503/5e66162fE33d655bf/0c0a01a0fdc26e20.png" alt="" />
                     <span class="poc-feature-item-name">{{isFull ? '退出全屏' : '全屏'}}</span>
                 </li>
-                 <li class="poc-feature-item" @click.stop="$emit('clickMsg')">
+                <li v-if="!!messageLink" class="poc-feature-item" @click.stop="clickLiHandle(messageLink)">
                     <img class="poc-feature-item-icon" src="http://img30.360buyimg.com/jr_image/jfs/t1/88965/23/14485/710/5e66162fE207463a9/e4db349240a4664d.png" alt="" />
                     <span class="poc-feature-item-name">消息</span>
                 </li>
@@ -44,7 +44,7 @@
                     <span class="poc-user-icon"></span>
                 </div>
                 <div class="poc-logout" @click.stop="logout" v-show="actived">
-                    <p class="poc-logout-name">退出</p>
+                    <p class="poc-logout-name">退 出</p>
                     <div class="poc-arrow"></div>
                 </div>
             </div>
@@ -56,6 +56,9 @@ import jsonp from './jsonp.js'
 export default {
     name: 'PocHeader',
     props: {
+        menuWidth: String,
+        messageLink: String,
+        helpLink: String
     },
     data() {
         return {
@@ -127,6 +130,16 @@ export default {
         },
         logout() {
             window.location.href = `//passport.jd.com/uc/login?ltype=logout&ReturnUrl=${encodeURIComponent(window.location.href)}`;
+        },
+        clickLiHandle(url) {
+            window.location.href = url
+        },
+        documentClickHandle() {
+            this.actived = false;
+            if (this.isSlide) {
+                this.isSlide = false;
+                document.getElementById('LEFT_AREA').style.height = '';
+            }
         }
     },
     created() {
@@ -139,13 +152,16 @@ export default {
             },
             callback: 'jQuery183027508230378578924_1583747349983'
         }).then(res => {
-            console.log(res);
             vm.user = res.nick;
-        })
+        }).catch(console.warn)
         document.onfullscreenchange = function () {
             vm.isFull = !vm.isFull;
         };
-    }
+        document.addEventListener('click', this.documentClickHandle, false)
+    },
+    beforeDestroy() {
+        document.removeEventListener('click', this.documentClickHandle, false)
+    },
 }
 </script>
 <style lang="scss" scoped>
@@ -174,10 +190,11 @@ export default {
             }
             .poc-menu-icon {
                 position: absolute;
-                right: 17px;
-                top: 22px;
+                right: 10px;
+                top: 14px;
                 width: 16px;
                 height: 16px;
+                padding: 8px;
                 cursor: pointer;
                 &-item {
                     display: block;
@@ -237,13 +254,14 @@ export default {
             text-align: center;
             line-height: 60px;
             color: black;
+            position: relative;
         }
         .poc-right-area {
-            flex: 0 0 580px;
+            flex: 0 0 auto;
             color: black;
             .poc-feature-list {
-                float: left;
-                width: 360px;
+                display: inline-block;
+                overflow: hidden;
                 height: 60px;
                 .poc-feature-item {
                     float: left;
@@ -272,9 +290,10 @@ export default {
             }
             .poc-user {
                 position: relative;
-                float: left;
+                display: inline-block;
                 height: 60px;
-                margin-left: 20px;
+                margin-left: 50px;
+                padding-right: 20px;
                 line-height: 60px;
                 cursor: pointer;
                 &-name {
@@ -304,8 +323,9 @@ export default {
                     overflow: hidden;
                 }
                 .poc-logout {
-                    position: relative;
-                    top: -10px;
+                    position: absolute;
+                    top: 50px;
+                    left: -18px;
                     z-index: 10;
                     margin: 5px 0;
                     background-color: #fff;
