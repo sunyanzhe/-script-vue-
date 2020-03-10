@@ -83,7 +83,7 @@ export default {
                     key: 'hangmu',
                     name: '航母-管理后台',
                     src: 'http://img30.360buyimg.com/jr_image/jfs/t1/89569/39/14359/470/5e65efa6E35dbbedb/a11c35a38cee20b1.png',
-                    link: 'http://resjr.jd.com'
+                    link: 'http://mcauth.jdfmgt.com'
                 }
             ]
         }
@@ -290,6 +290,7 @@ export default {
             }
             .poc-user {
                 position: relative;
+                z-index: 999999;
                 display: inline-block;
                 height: 60px;
                 margin-left: 50px;
@@ -304,6 +305,7 @@ export default {
                 }
                 &-icon {
                     position: absolute;
+                    z-index: 999999;
                     top: 25px;
                     width: 5px;
                     height: 5px;
@@ -324,6 +326,7 @@ export default {
                 }
                 .poc-logout {
                     position: absolute;
+                    z-index: 999999;
                     top: 50px;
                     left: -18px;
                     z-index: 10;
