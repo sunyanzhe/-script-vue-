@@ -8,8 +8,8 @@ module.exports = {
         main: path.resolve(__dirname, '../src/main.js')
     },
     output: {
-        filename: 'pocheader.js',
-        path: path.resolve(__dirname, '../server/dist')
+        filename: 'index.js',
+        path: path.resolve(__dirname, '../dist')
     },
     module: {
         rules: [
