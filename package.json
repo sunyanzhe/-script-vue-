@@ -2,7 +2,7 @@
   "name": "poc-header",
   "version": "1.0.2",
   "description": "中信POC",
-  "main": "./dist/sindex.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "webpack --config ./build/webpack.config.js"
   },
